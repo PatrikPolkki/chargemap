@@ -1,5 +1,6 @@
 "use strict";
 import mongoose from "mongoose";
+import connections from "../models/connections";
 
 const Schema = mongoose.Schema;
 
@@ -21,28 +22,12 @@ const stationSchema = new Schema({
       required: true,
     },
   },
+  Connections: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: connections,
+    },
+  ],
 });
-
-stationSchema.query.byGender = function (gender) {
-  return this.find(gender ? { gender } : {});
-};
-
-stationSchema.query.olderThan = function (age) {
-  return this.find(
-    age
-      ? {
-          birthdate: {
-            $gte: new Date(
-              new Date().setFullYear(new Date().getFullYear() - age)
-            ),
-          },
-        }
-      : {}
-  );
-};
-
-stationSchema.query.heavierThan = function (weight) {
-  return this.find(weight ? { weight: { $gte: weight } } : {});
-};
 
 export default mongoose.model("station", stationSchema);

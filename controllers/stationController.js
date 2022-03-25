@@ -3,19 +3,8 @@
 import stations from "../models/stationModel";
 
 const station_list_get = async (req, res) => {
-  console.log("query", req.query);
-  const gender = req.query.gender;
-  const weight = req.query.weight;
-  const age = req.query.age;
-
   try {
-    const result = await stations
-      .find()
-      .byGender(gender)
-      .olderThan(age)
-      .heavierThan(weight);
-
-    res.json(result);
+    res.json(await stations.find().populate("Connections"));
   } catch (error) {
     console.log(error);
   }
