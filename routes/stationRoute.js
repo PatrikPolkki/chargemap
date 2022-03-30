@@ -8,11 +8,14 @@ import {
   station_post,
   station_put,
   station_delete,
+  station_list_get_by_area,
 } from "../controllers/stationController";
 
 const router = Router();
 
 router.get("/", station_list_get);
+
+router.get("/area", station_list_get_by_area);
 
 router.get("/:id", station_get);
 
