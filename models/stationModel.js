@@ -5,7 +5,6 @@ import connections from "../models/connections";
 const Schema = mongoose.Schema;
 
 const stationSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   Title: String,
   Town: String,
   AddressLine1: String,
@@ -29,5 +28,6 @@ const stationSchema = new Schema({
     },
   ],
 });
+stationSchema.index({ Location: "2dsphere" });
 
 export default mongoose.model("station", stationSchema);
