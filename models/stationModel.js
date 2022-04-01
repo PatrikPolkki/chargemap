@@ -1,6 +1,6 @@
-"use strict";
-import mongoose from "mongoose";
-import connections from "../models/connections";
+'use strict';
+import mongoose from 'mongoose';
+import connections from '../models/connections';
 
 const Schema = mongoose.Schema;
 
@@ -13,8 +13,7 @@ const stationSchema = new Schema({
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
-      enum: ["Point"], // 'location.type' must be 'Point'
-      required: true,
+      default: 'Point', // 'location.type' must be 'Point'
     },
     coordinates: {
       type: [Number],

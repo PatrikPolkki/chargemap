@@ -1,17 +1,19 @@
-"use strict";
+'use strict';
 
-import station from "../models/stationModel.js";
-import { rectangleBounds } from "../utils/rectangleBounds.js";
-import connections from "../models/connections.js";
+import station from '../models/stationModel.js';
+import {rectangleBounds} from '../utils/rectangleBounds.js';
+import connections from '../models/connections.js';
 
 const station_list_get = async (req, res) => {
   try {
     const resultLimit = req.query.limit || 10;
     res.json(
-      await station.find().populate(stationPopulationOptions).limit(resultLimit)
+        await station.find().
+            populate(stationPopulationOptions).
+            limit(resultLimit),
     );
   } catch (e) {
-    res.status(400).send("Something went wrong");
+    res.status(400).send('Something went wrong');
   }
 };
 
@@ -78,7 +80,6 @@ const station_put = async (req, res) => {
   try {
     const parsedConnections = await JSON.parse(req.body.Connections);
     const parsedStation = await JSON.parse(req.body.Station);
-    console.log(parsedStation.id);
 
     await station.findOneAndUpdate(
       { _id: parsedStation._id },
